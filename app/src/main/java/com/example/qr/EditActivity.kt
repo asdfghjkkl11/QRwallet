@@ -3,6 +3,7 @@ package com.example.qr
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.view.MotionEvent
 import android.view.Window
 import io.realm.Realm
 import io.realm.kotlin.createObject
@@ -28,7 +29,6 @@ class EditActivity : Activity() {
                 .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             startActivity(intent)
         }
-
         cancel.setOnClickListener {
             finish()
         }
@@ -50,9 +50,15 @@ class EditActivity : Activity() {
                     max as Long + 1
                 account = realm.createObject(id)
             }
-
             account.bank = Bank
             account.code = Code
         }
+    }
+
+    override fun onTouchEvent(event: MotionEvent): Boolean {
+        if (event.action == MotionEvent.ACTION_OUTSIDE) {
+            return false
+        }
+        return true
     }
 }

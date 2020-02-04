@@ -3,6 +3,7 @@ package com.example.qr
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.view.MotionEvent
 import android.view.Window
 import io.realm.Realm
 import io.realm.kotlin.where
@@ -23,7 +24,6 @@ class DeleteActivity : Activity() {
                 .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             startActivity(intent)
         }
-
         cancel.setOnClickListener {
             finish()
         }
@@ -35,4 +35,12 @@ class DeleteActivity : Activity() {
         result.deleteAllFromRealm()
         realm.commitTransaction()
     }
+
+    override fun onTouchEvent(event: MotionEvent): Boolean {
+        if (event.action == MotionEvent.ACTION_OUTSIDE) {
+            return false
+        }
+        return true
+    }
+
 }

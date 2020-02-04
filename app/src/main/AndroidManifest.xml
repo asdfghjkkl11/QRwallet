@@ -30,6 +30,7 @@
         <activity android:name=".EditActivity" android:theme="@android:style/Theme.Dialog"/>
         <activity android:name=".DeleteActivity" android:theme="@android:style/Theme.Dialog"/>
         <activity android:name=".QRPopupActivity" android:theme="@android:style/Theme.Dialog"/>
+        <activity android:name=".QRCodeActivity" android:theme="@android:style/Theme.Dialog"/>
     </application>
 
 </manifest>

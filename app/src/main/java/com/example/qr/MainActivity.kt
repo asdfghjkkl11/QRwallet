@@ -1,11 +1,7 @@
 package com.example.qr
 
-import android.content.ClipData
-import android.content.ClipboardManager
-import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
-import android.net.Uri
 import android.os.Bundle
 import android.view.Window
 import androidx.appcompat.app.AppCompatActivity
@@ -16,9 +12,6 @@ import com.journeyapps.barcodescanner.BarcodeEncoder
 import io.realm.Realm
 import io.realm.kotlin.where
 import kotlinx.android.synthetic.main.activity_main.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 
 class MainActivity : AppCompatActivity(){
@@ -29,8 +22,10 @@ class MainActivity : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         requestWindowFeature(Window.FEATURE_NO_TITLE)
         setContentView(R.layout.activity_main)
+
         init()
         setUI()
+
         camera.setOnClickListener {
             val scanner = IntentIntegrator(this)
             scanner.initiateScan()
@@ -39,13 +34,14 @@ class MainActivity : AppCompatActivity(){
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         val result = IntentIntegrator.parseActivityResult(requestCode,resultCode,data)
+
         if(result != null){
             if(result.contents != null){
                 val str = result.contents.split(" ")
-                val key = "9cadbe3e1e3c4676b1181f5f015f0dee"
-                val req = RequestModel(key,str[0],str[1])
-                //saveClip(result.contents)
-                callTossAPI(req)
+                val intent = Intent(this, QRCodeActivity::class.java)
+                intent.putExtra("bank",str[0])
+                intent.putExtra("code",str[1])
+                startActivity(intent)
             }
         }else{
             super.onActivityResult(requestCode, resultCode, data)
@@ -69,16 +65,16 @@ class MainActivity : AppCompatActivity(){
         }
         accountList.add(account((-2).toLong(),"","",makeQR("")))
     }
+
     private fun setUI(){
         val accountAdapter = Adpater(this, accountList, viewPager)
-        viewPager.adapter = accountAdapter
 
+        viewPager.adapter = accountAdapter
         edit.setOnClickListener {
             val intent = Intent(this, EditActivity::class.java)
             intent.putExtra("ID",accountList[viewPager.currentItem].ID)
             startActivity(intent)
         }
-
         delete.setOnClickListener {
             val intent = Intent(this, DeleteActivity::class.java)
             intent.putExtra("ID",accountList[viewPager.currentItem].ID)
@@ -94,31 +90,7 @@ class MainActivity : AppCompatActivity(){
             val barcodeEncoder = BarcodeEncoder()
             return barcodeEncoder.createBitmap(barcodeManager)
         }catch (e:Exception){}
-
         return null
-    }
-
-    private fun saveClip(str : String){
-        val clipboardManager = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-        clipboardManager.primaryClip = ClipData.newPlainText("clip",str)
-    }
-
-    private fun callTossAPI(req:RequestModel){
-        val call = getService().postJson(req)
-
-        call.enqueue(object : Callback<ResponseModel> {
-            override fun onFailure(call: Call<ResponseModel>, t: Throwable) {}
-
-            override fun onResponse(call: Call<ResponseModel>, response: Response<ResponseModel>) {
-                val res= response.body()
-                if(res!!.resultType=="SUCCESS"){
-                    intent = Intent(Intent.ACTION_VIEW)
-                    val uri = Uri.parse(res.success.link)
-                    intent.data = uri
-                    startActivity(intent)
-                }
-            }
-        })
     }
 }
 

@@ -18,6 +18,7 @@ class QRWidget : AppWidgetProvider() {
         val action = intent.action
         val remoteViews = RemoteViews(context.packageName,R.layout.q_r_widget)
         val qr = intent.getStringExtra("QR")
+
         if (AppWidgetManager.ACTION_APPWIDGET_UPDATE==action && qr != null) {
             inputValues= makeQR(qr)
             updateQRcode(context,remoteViews)
@@ -28,6 +29,7 @@ class QRWidget : AppWidgetProvider() {
         remoteViews.setImageViewBitmap(R.id.imageView,inputValues)
         val appWidgetManager = AppWidgetManager.getInstance(context)
         val appWidgetIds = appWidgetManager.getAppWidgetIds(ComponentName(context,QRWidget::class.java))
+
         if(appWidgetIds != null && appWidgetIds.isNotEmpty()) {
             appWidgetManager.updateAppWidget(appWidgetIds,remoteViews)
             this.onUpdate(context, AppWidgetManager.getInstance(context), appWidgetIds)
@@ -46,6 +48,7 @@ class QRWidget : AppWidgetProvider() {
 
 fun makeQR(text:String): Bitmap? {
     val multiFormatWriter = MultiFormatWriter()
+
     try {
         val barcodeManager = multiFormatWriter.encode(text, BarcodeFormat.QR_CODE,800,800)
         val barcodeEncoder = BarcodeEncoder()

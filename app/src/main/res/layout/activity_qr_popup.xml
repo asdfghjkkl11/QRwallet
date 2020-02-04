@@ -12,6 +12,7 @@
         android:layout_height="wrap_content">
         <TextView
             android:text="위젯에 등록하시겠습니까?"
+            android:id="@+id/text"
             android:textSize="20sp"
             android:textColor="#fff"
             android:gravity="center"
@@ -98,7 +99,7 @@
             android:id="@+id/submit"
             android:background="#00000000"
             android:layout_width="match_parent"
-            android:layout_height="53dp"
+            android:layout_height="60dp"
             android:layout_weight = "1"
             />
         <Button
@@ -110,7 +111,7 @@
             android:id="@+id/cancel"
             android:background="#00000000"
             android:layout_width="match_parent"
-            android:layout_height="53dp"
+            android:layout_height="60dp"
             android:layout_weight = "1"
             />
     </LinearLayout>

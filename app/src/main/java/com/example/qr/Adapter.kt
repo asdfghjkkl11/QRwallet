@@ -24,6 +24,7 @@ class Adpater (
         val code = view.findViewById<TextView>(R.id.code)
         val text = view.findViewById<TextView>(R.id.text)
         val account = accountList[position]
+
         if(account.ID == (-2).toLong()) {
             bank.visibility = View.GONE
             code.visibility = View.GONE
