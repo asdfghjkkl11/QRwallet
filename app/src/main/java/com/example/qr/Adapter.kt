@@ -1,5 +1,8 @@
 package com.example.qr
+
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,7 +10,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
-
 
 class Adpater (
     private val context: Context,
@@ -20,13 +22,33 @@ class Adpater (
         val qr = view.findViewById<ImageView>(R.id.qr)
         val bank = view.findViewById<TextView>(R.id.bank)
         val code = view.findViewById<TextView>(R.id.code)
+        val text = view.findViewById<TextView>(R.id.text)
         val account = accountList[position]
-
-        qr.setImageBitmap(account.QR)
-        bank.text = account.bank
-        code.text = account.code
+        if(account.ID == (-2).toLong()) {
+            bank.visibility = View.GONE
+            code.visibility = View.GONE
+            qr.setOnClickListener {
+                val intent = Intent(context, EditActivity::class.java)
+                intent.putExtra("ID",(-1).toLong())
+                val activity = context as Activity
+                activity.startActivity(intent)
+            }
+        }else {
+            text.visibility = View.GONE
+            qr.setImageBitmap(account.QR)
+            qr.setOnClickListener {
+                val bank = account.bank
+                val code = account.code
+                val intent = Intent(context, QRPopupActivity::class.java)
+                intent.putExtra("bank", bank)
+                intent.putExtra("code", code)
+                val activity = context as Activity
+                activity.startActivity(intent)
+            }
+            bank.text = account.bank
+            code.text = account.code
+        }
         viewPager.addView(view)
-
         return view
     }
 

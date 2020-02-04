@@ -1,27 +1,31 @@
 package com.example.qr
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import android.view.Window
 import io.realm.Realm
 import io.realm.kotlin.where
 import kotlinx.android.synthetic.main.activity_delete.*
 
-class DeleteActivity : AppCompatActivity() {
+class DeleteActivity : Activity() {
     private val realm = Realm.getDefaultInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        requestWindowFeature(Window.FEATURE_NO_TITLE)
         setContentView(R.layout.activity_delete)
 
         submit.setOnClickListener {
             val id= intent.getLongExtra("ID",-1)
             deleteFromRealm(id)
-            goMainActivity()
+            val intent = Intent(this,MainActivity::class.java)
+                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            startActivity(intent)
         }
 
         cancel.setOnClickListener {
-            goMainActivity()
+            finish()
         }
     }
 
@@ -30,11 +34,5 @@ class DeleteActivity : AppCompatActivity() {
         val result=realm.where<RealmModel>().equalTo("ID",id).findAll()
         result.deleteAllFromRealm()
         realm.commitTransaction()
-    }
-
-    private fun goMainActivity(){
-        val intent = Intent(this,MainActivity::class.java)
-            .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        startActivity(intent)
     }
 }

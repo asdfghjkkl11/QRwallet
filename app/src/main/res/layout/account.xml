@@ -7,10 +7,22 @@
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/qr0"
+        android:src="@drawable/button"
         android:id="@+id/qr"
         android:layout_centerHorizontal="true"
-        android:scaleType="centerInside"
+        android:layout_centerInParent="true"
+        android:background="#00ff0000"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:textSize="20sp"
+        android:layout_marginTop="30dp"
+        android:text="계좌를 등록해주세요."
+        android:layout_below="@+id/qr"
+        android:id="@+id/text"
         />
 
     <TextView

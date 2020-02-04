@@ -1,15 +1,14 @@
 package com.example.qr
 
-import android.appwidget.AppWidgetManager
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
+import android.view.Window
+import androidx.appcompat.app.AppCompatActivity
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.MultiFormatWriter
 import com.google.zxing.integration.android.IntentIntegrator
@@ -18,9 +17,8 @@ import io.realm.Realm
 import io.realm.kotlin.where
 import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Call
-import retrofit2.Response
 import retrofit2.Callback
-import kotlin.collections.ArrayList
+import retrofit2.Response
 
 
 class MainActivity : AppCompatActivity(){
@@ -29,13 +27,10 @@ class MainActivity : AppCompatActivity(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        requestWindowFeature(Window.FEATURE_NO_TITLE)
         setContentView(R.layout.activity_main)
         init()
-        if(accountList.isEmpty()){
-            addAccount()
-        }else {
-            editAccount()
-        }
+        setUI()
         camera.setOnClickListener {
             val scanner = IntentIntegrator(this)
             scanner.initiateScan()
@@ -72,21 +67,9 @@ class MainActivity : AppCompatActivity(){
             val code = result[i]!!.code
             accountList.add(account(result[i]!!.ID,bank,code,makeQR("$bank $code")))
         }
+        accountList.add(account((-2).toLong(),"","",makeQR("")))
     }
-
-    private fun addAccount(){
-        viewPager.visibility = View.GONE
-        RL.visibility = View.VISIBLE
-        btns1.visibility = View.GONE
-        btns2.visibility = View.GONE
-        add.setOnClickListener {
-            val intent = Intent(this, EditActivity::class.java)
-            intent.putExtra("ID", (-1).toLong())
-            startActivity(intent)
-        }
-    }
-
-    private fun editAccount(){
+    private fun setUI(){
         val accountAdapter = Adpater(this, accountList, viewPager)
         viewPager.adapter = accountAdapter
 
@@ -100,22 +83,6 @@ class MainActivity : AppCompatActivity(){
             val intent = Intent(this, DeleteActivity::class.java)
             intent.putExtra("ID",accountList[viewPager.currentItem].ID)
             startActivity(intent)
-        }
-
-        add2.setOnClickListener {
-            val intent = Intent(this, EditActivity::class.java)
-            intent.putExtra("ID",(-1).toLong())
-            startActivity(intent)
-        }
-
-        submit.setOnClickListener {
-            val bank = accountList[viewPager.currentItem].bank
-            val code = accountList[viewPager.currentItem].code
-            val qr= "$bank $code"
-            val intent = Intent(this, QRWidget::class.java)
-            intent.action = AppWidgetManager.ACTION_APPWIDGET_UPDATE
-            intent.putExtra("QR", qr)
-            this.sendBroadcast(intent)
         }
     }
 

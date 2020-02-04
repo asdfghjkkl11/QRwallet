@@ -12,13 +12,16 @@ interface RetrofitService {
     @POST("/transfer-web/linkgen-api/link")
     fun postJson(@Body body: RequestModel): Call<ResponseModel>
 }
+
 fun getService():RetrofitService{
+
     val client = OkHttpClient.Builder().addInterceptor { chain ->
         val newRequest = chain.request().newBuilder()
             .addHeader("Content-Type", "application/json")
             .build()
         chain.proceed(newRequest)
     }.build()
+
     val retrofit =
         Retrofit.Builder()
             .client(client)
@@ -26,5 +29,6 @@ fun getService():RetrofitService{
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .build()
+
     return retrofit.create(RetrofitService::class.java)
 }

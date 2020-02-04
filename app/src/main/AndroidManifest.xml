@@ -27,8 +27,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".EditActivity"/>
-        <activity android:name=".DeleteActivity"/>
+        <activity android:name=".EditActivity" android:theme="@android:style/Theme.Dialog"/>
+        <activity android:name=".DeleteActivity" android:theme="@android:style/Theme.Dialog"/>
+        <activity android:name=".QRPopupActivity" android:theme="@android:style/Theme.Dialog"/>
     </application>
 
 </manifest>
