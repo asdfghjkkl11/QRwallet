@@ -9,6 +9,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.Window
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_qr_popup.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -31,11 +32,13 @@ class QRCodeActivity : Activity() {
         submit.text = "클립보드에 복사"
         submit.setOnClickListener {
             saveClip("$Bank $Code")
+            Toast.makeText(this,"클립보드에 복사되었습니다.", Toast.LENGTH_SHORT).show()
             finish()
         }
         cancel.text = "Toss앱 실행"
         cancel.setOnClickListener {
             callTossAPI(req)
+            Toast.makeText(this,"토스앱이 실행됩니다.", Toast.LENGTH_SHORT).show()
             finish()
         }
     }

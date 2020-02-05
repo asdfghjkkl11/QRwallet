@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.Window
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_qr_popup.*
 
 class QRPopupActivity: Activity() {
@@ -25,6 +26,7 @@ class QRPopupActivity: Activity() {
             intent.action = AppWidgetManager.ACTION_APPWIDGET_UPDATE
             intent.putExtra("QR", qr)
             this.sendBroadcast(intent)
+            Toast.makeText(this,"위젯에 등록되었습니다.", Toast.LENGTH_SHORT).show()
             finish()
         }
         cancel.setOnClickListener {

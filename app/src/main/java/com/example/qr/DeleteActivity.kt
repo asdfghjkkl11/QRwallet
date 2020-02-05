@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.Window
+import android.widget.Toast
 import io.realm.Realm
 import io.realm.kotlin.where
 import kotlinx.android.synthetic.main.activity_delete.*
@@ -22,6 +23,7 @@ class DeleteActivity : Activity() {
             deleteFromRealm(id)
             val intent = Intent(this,MainActivity::class.java)
                 .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            Toast.makeText(this,"삭제되었습니다.", Toast.LENGTH_SHORT).show()
             startActivity(intent)
         }
         cancel.setOnClickListener {
