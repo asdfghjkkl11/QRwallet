@@ -21,22 +21,22 @@ class QRCodeActivity : Activity() {
         requestWindowFeature(Window.FEATURE_NO_TITLE)
         setContentView(R.layout.activity_qr_popup)
 
-        val key = "9cadbe3e1e3c4676b1181f5f015f0dee"
+        val key = ""
         val Bank = intent.getStringExtra("bank")
         val Code = intent.getStringExtra("code")
         val req = RequestModel(key,Bank,Code)
 
-        bank.text = Bank
-        code.text = Code
-        text.text = "작업을 선택해 주세요"
-        submit.text = "클립보드에 복사"
-        submit.setOnClickListener {
+        bankXML.text = Bank
+        codeXML.text = Code
+        textXML.text = "작업을 선택해 주세요"
+        submitXML.text = "클립보드에 복사"
+        submitXML.setOnClickListener {
             saveClip("$Bank $Code")
             Toast.makeText(this,"클립보드에 복사되었습니다.", Toast.LENGTH_SHORT).show()
             finish()
         }
-        cancel.text = "Toss앱 실행"
-        cancel.setOnClickListener {
+        cancelXML.text = "Toss앱 실행"
+        cancelXML.setOnClickListener {
             callTossAPI(req)
             Toast.makeText(this,"토스앱이 실행됩니다.", Toast.LENGTH_SHORT).show()
             finish()

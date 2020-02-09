@@ -18,9 +18,9 @@ class QRPopupActivity: Activity() {
         val Bank = intent.getStringExtra("bank")
         val Code = intent.getStringExtra("code")
 
-        bank.text = Bank
-        code.text = Code
-        submit.setOnClickListener {
+        bankXML.text = Bank
+        codeXML.text = Code
+        submitXML.setOnClickListener {
             val qr= "$Bank $Code"
             val intent = Intent(this, QRWidget::class.java)
             intent.action = AppWidgetManager.ACTION_APPWIDGET_UPDATE
@@ -29,7 +29,7 @@ class QRPopupActivity: Activity() {
             Toast.makeText(this,"위젯에 등록되었습니다.", Toast.LENGTH_SHORT).show()
             finish()
         }
-        cancel.setOnClickListener {
+        cancelXML.setOnClickListener {
             finish()
         }
     }

@@ -19,12 +19,11 @@ class Adpater (
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         val view: View = LayoutInflater.from(context).inflate(R.layout.account, null)
-        val qr = view.findViewById<ImageView>(R.id.qr)
-        val bank = view.findViewById<TextView>(R.id.bank)
-        val code = view.findViewById<TextView>(R.id.code)
-        val text = view.findViewById<TextView>(R.id.text)
+        val qr = view.findViewById<ImageView>(R.id.qrXML)
+        val bank = view.findViewById<TextView>(R.id.bankXML)
+        val code = view.findViewById<TextView>(R.id.codeXML)
+        val text = view.findViewById<TextView>(R.id.textXML)
         val account = accountList[position]
-
         if(account.ID == (-2).toLong()) {
             bank.visibility = View.GONE
             code.visibility = View.GONE

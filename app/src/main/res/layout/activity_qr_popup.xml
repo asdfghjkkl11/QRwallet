@@ -5,14 +5,13 @@
     android:layout_width="300dp"
     android:layout_height="wrap_content">
 
-    <!-- 타이틀바 -->
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
             android:text="위젯에 등록하시겠습니까?"
-            android:id="@+id/text"
+            android:id="@+id/textXML"
             android:textSize="20sp"
             android:textColor="#fff"
             android:gravity="center"
@@ -20,71 +19,78 @@
             android:layout_width="match_parent"
             android:layout_height="53dp" />
     </LinearLayout>
-    <!-- //end 타이틀바 -->
-
-    <!-- Notice -->
     <LinearLayout
         android:padding="24dp"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="#ffffff">
         <LinearLayout
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#eeeeee">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="30sp"
+                android:textSize="15sp"
+                android:textColor="#000"
+                android:alpha="0.87"
+                android:gravity="center"
+                android:layout_margin ="1dp"
+                android:text="은행:"
+                android:background="#ffffff"
+                android:padding="5dp"
+                />
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="30sp"
                 android:textSize="15sp"
                 android:textColor="#000"
                 android:alpha="0.87"
                 android:gravity="center"
-                android:layout_marginBottom="3dp"
-                android:text="은행: "/>
-            <TextView
-                android:id="@+id/bank"
-                android:textSize="15sp"
-                android:textColor="#000"
-                android:alpha="0.87"
-                android:gravity="center"
-                android:layout_marginBottom="3dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_margin="1dp"
+                android:text="계좌번호:"
+                android:background="#ffffff"
+                android:padding="5dp"
+                />
         </LinearLayout>
         <LinearLayout
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:gravity="center"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="#eeeeee">
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="15sp"
-                android:textColor="#000"
-                android:alpha="0.87"
-                android:gravity="center"
-                android:layout_marginBottom="3dp"
-                android:text="계좌번호: "/>
-            <TextView
-                android:id="@+id/code"
-                android:textSize="15sp"
-                android:textColor="#000"
-                android:alpha="0.87"
-                android:gravity="center"
-                android:layout_marginBottom="3dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="30sp"
+                android:id="@+id/bankXML"
+                android:textSize="15sp"
+                android:textColor="#000"
+                android:alpha="0.87"
+                android:gravity="center"
+                android:layout_margin="1dp"
+                android:background="#ffffff"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="30sp"
+                android:id="@+id/codeXML"
+                android:textSize="15sp"
+                android:textColor="#000"
+                android:alpha="0.87"
+                android:gravity="center"
+                android:background="#ffffff"
+                android:layout_margin="1dp" />
         </LinearLayout>
     </LinearLayout>
-    <!-- Notice -->
 
     <View
         android:background="#66bdbdbd"
         android:layout_width="match_parent"
         android:layout_height="1dp" />
 
-    <!-- 닫기 버튼 -->
     <LinearLayout
         android:orientation="horizontal"
         android:gravity="center"
@@ -95,9 +101,10 @@
             android:textSize="15sp"
             android:textColor="#3F51B5"
             android:padding="16dp"
+            android:layout_margin="1dp"
             android:gravity="center"
-            android:id="@+id/submit"
-            android:background="#00000000"
+            android:id="@+id/submitXML"
+            android:background="#ffffff"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_weight = "1"
@@ -107,13 +114,15 @@
             android:textSize="15sp"
             android:textColor="#3F51B5"
             android:padding="16dp"
+            android:layout_margin="1dp"
             android:gravity="center"
-            android:id="@+id/cancel"
-            android:background="#00000000"
+            android:id="@+id/cancelXML"
+            android:background="#ffffff"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_weight = "1"
             />
     </LinearLayout>
-    <!--// 닫기 버튼 -->
 </LinearLayout>
+
+

@@ -18,15 +18,16 @@ class DeleteActivity : Activity() {
         requestWindowFeature(Window.FEATURE_NO_TITLE)
         setContentView(R.layout.activity_delete)
 
-        submit.setOnClickListener {
+        submitXML.setOnClickListener {
             val id= intent.getLongExtra("ID",-1)
             deleteFromRealm(id)
             val intent = Intent(this,MainActivity::class.java)
                 .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             Toast.makeText(this,"삭제되었습니다.", Toast.LENGTH_SHORT).show()
             startActivity(intent)
+            finish()
         }
-        cancel.setOnClickListener {
+        cancelXML.setOnClickListener {
             finish()
         }
     }

@@ -8,7 +8,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/button"
-        android:id="@+id/qr"
+        android:id="@+id/qrXML"
         android:layout_centerHorizontal="true"
         android:layout_centerInParent="true"
         android:background="#00ff0000"
@@ -21,24 +21,24 @@
         android:textSize="20sp"
         android:layout_marginTop="30dp"
         android:text="계좌를 등록해주세요."
-        android:layout_below="@+id/qr"
-        android:id="@+id/text"
+        android:layout_below="@+id/qrXML"
+        android:id="@+id/textXML"
         />
 
     <TextView
-        android:id="@+id/bank"
+        android:id="@+id/bankXML"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/qr"
+        android:layout_below="@+id/qrXML"
         android:layout_centerHorizontal="true"
         android:textSize="20sp"
         />
 
     <TextView
-        android:id="@+id/code"
+        android:id="@+id/codeXML"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/bank"
+        android:layout_below="@+id/bankXML"
         android:layout_centerHorizontal="true"
         android:textSize="20sp"
         />

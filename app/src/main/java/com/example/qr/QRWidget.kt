@@ -26,7 +26,7 @@ class QRWidget : AppWidgetProvider() {
     }
 
     private fun updateQRcode(context: Context, remoteViews: RemoteViews) {
-        remoteViews.setImageViewBitmap(R.id.imageView,inputValues)
+        remoteViews.setImageViewBitmap(R.id.imageViewXML,inputValues)
         val appWidgetManager = AppWidgetManager.getInstance(context)
         val appWidgetIds = appWidgetManager.getAppWidgetIds(ComponentName(context,QRWidget::class.java))
 

@@ -4,6 +4,8 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
+import android.view.View
+import androidx.viewpager.widget.ViewPager.OnPageChangeListener
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.MultiFormatWriter
 import com.google.zxing.integration.android.IntentIntegrator
@@ -23,7 +25,7 @@ class MainActivity : Activity(){
         init()
         setUI()
 
-        camera.setOnClickListener {
+        cameraXML.setOnClickListener {
             val scanner = IntentIntegrator(this)
             scanner.initiateScan()
         }
@@ -60,21 +62,40 @@ class MainActivity : Activity(){
             val code = result[i]!!.code
             accountList.add(account(result[i]!!.ID,bank,code,makeQR("$bank $code")))
         }
+        if(result.size!=0)
+            btnsXML.visibility = View.VISIBLE
         accountList.add(account((-2).toLong(),"","",makeQR("")))
     }
 
     private fun setUI(){
-        val accountAdapter = Adpater(this, accountList, viewPager)
+        val accountAdapter = Adpater(this, accountList, viewPagerXML)
 
-        viewPager.adapter = accountAdapter
-        edit.setOnClickListener {
+        viewPagerXML.adapter = accountAdapter
+        viewPagerXML.addOnPageChangeListener(object: OnPageChangeListener{
+            override fun onPageScrollStateChanged(state: Int) {}
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int
+            ) {}
+            override fun onPageSelected(position: Int) {
+                if(accountList[position].ID==(-2).toLong()){
+                    btnsXML.visibility = View.INVISIBLE
+                }else{
+                    btnsXML.visibility = View.VISIBLE
+                }
+            }
+        })
+        editXML.setOnClickListener {
             val intent = Intent(this, EditActivity::class.java)
-            intent.putExtra("ID",accountList[viewPager.currentItem].ID)
+            intent.putExtra("ID",accountList[viewPagerXML.currentItem].ID)
+            intent.putExtra("bank",accountList[viewPagerXML.currentItem].bank)
+            intent.putExtra("code",accountList[viewPagerXML.currentItem].code)
             startActivity(intent)
         }
-        delete.setOnClickListener {
+        deleteXML.setOnClickListener {
             val intent = Intent(this, DeleteActivity::class.java)
-            intent.putExtra("ID",accountList[viewPager.currentItem].ID)
+            intent.putExtra("ID",accountList[viewPagerXML.currentItem].ID)
             startActivity(intent)
         }
     }
