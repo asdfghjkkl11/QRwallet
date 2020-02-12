@@ -83,7 +83,8 @@
                 android:alpha="0.87"
                 android:gravity="center"
                 android:background="#ffffff"
-                android:layout_margin="1dp" />
+                android:layout_margin="1dp"
+                android:singleLine="true"/>
         </LinearLayout>
     </LinearLayout>
 
